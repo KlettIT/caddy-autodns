@@ -1,55 +1,97 @@
-**DEVELOPER INSTRUCTIONS:**
+# AutoDNS Module for Caddy
 
-- Update module name in go.mod
-- Update dependencies to latest versions
-- Update name and year in license
-- Customize configuration and Caddyfile parsing
-- Update godocs / comments (especially provider name and nuances)
-- Update README and remove this section
+This package provides a DNS provider module for [Caddy](https://github.com/caddyserver/caddy). It allows you to manage DNS records with AutoDNS.
 
----
-
-\<PROVIDER\> module for Caddy
-===========================
-
-This package contains a DNS provider module for [Caddy](https://github.com/caddyserver/caddy). It can be used to manage DNS records with \<PROVIDER\>.
-
-## Caddy module name
+## Caddy Module Name
 
 ```
-dns.providers.provider_name
+dns.providers.AutoDNS
 ```
 
-## Config examples
+## Installation
 
-To use this module for the ACME DNS challenge, [configure the ACME issuer in your Caddy JSON](https://caddyserver.com/docs/json/apps/tls/automation/policies/issuer/acme/) like so:
+To install this module, add it to your Caddy configuration.
+
+## Configuration Examples
+
+### JSON Configuration
+
+To use this module for the ACME DNS challenge, configure the ACME issuer in your Caddy JSON like so:
 
 ```json
 {
-	"module": "acme",
-	"challenges": {
-		"dns": {
-			"provider": {
-				"name": "provider_name",
-				"api_token": "YOUR_PROVIDER_API_TOKEN"
-			}
-		}
-	}
+  "apps": {
+    "tls": {
+      "automation": {
+        "policies": [
+          {
+            "issuers": [
+              {
+                "module": "acme",
+                "challenges": {
+                  "dns": {
+                    "provider": {
+                      "name": "AutoDNS",
+                      "Username": "AUTODNS_USERNAME",
+                      "Password": "AUTODNS_PASSWORD",
+					  "Endpoint": "https://api.autodns.com/v1", # Optional
+					  "Context": 4 # Optional
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
 }
 ```
 
-or with the Caddyfile:
+### Caddyfile Configuration
+
+You can also configure the module using the Caddyfile.
+
+#### Global Configuration
 
 ```
-# globally
 {
-	acme_dns provider_name ...
+  acme_dns AutoDNS {
+    username "<username>"
+    password "<password>"
+  }
 }
 ```
 
+#### Per-Site Configuration
+
 ```
-# one site
 tls {
-	dns provider_name ...
+  dns AutoDNS {
+    username "<username>"
+    password "<password>"
+  }
 }
 ```
+
+## Environment Variables
+
+You can also set the following environment variables to configure the module:
+
+- `AUTODNS_USERNAME`
+- `AUTODNS_PASSWORD`
+- `AUTODNS_ENDPOINT`
+- `AUTODNS_CONTEXT`
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+
+## Acknowledgements
+
+This module is based on the [libdns](https://github.com/libdns/libdns) and [Caddy](https://github.com/caddyserver/caddy) projects.

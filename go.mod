@@ -1,4 +1,4 @@
-module github.com/caddy-dns/autodns
+module github.com/KlettIT/autodns
 
 go 1.22.10
 

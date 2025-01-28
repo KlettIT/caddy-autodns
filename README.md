@@ -5,7 +5,7 @@ This package provides a DNS provider module for [Caddy](https://github.com/caddy
 ## Caddy Module Name
 
 ```
-dns.providers.AutoDNS
+dns.providers.autodns
 ```
 
 ## Installation
@@ -31,11 +31,11 @@ To use this module for the ACME DNS challenge, configure the ACME issuer in your
                 "challenges": {
                   "dns": {
                     "provider": {
-                      "name": "AutoDNS",
-                      "Username": "AUTODNS_USERNAME",
-                      "Password": "AUTODNS_PASSWORD",
-					  "Endpoint": "https://api.autodns.com/v1", # Optional
-					  "Context": 4 # Optional
+                      "name": "autodns",
+                      "Username": "<AUTODNS_USERNAME>",
+                      "Password": "<AUTODNS_PASSWORD>",
+					  "Endpoint": "https://api.autodns.com/v1", //Optional
+					  "Context": 4 //Optional
                     }
                   }
                 }
@@ -57,7 +57,7 @@ You can also configure the module using the Caddyfile.
 
 ```
 {
-  acme_dns AutoDNS {
+  acme_dns autodns {
     username "<username>"
     password "<password>"
   }
@@ -68,21 +68,12 @@ You can also configure the module using the Caddyfile.
 
 ```
 tls {
-  dns AutoDNS {
+  dns autodns {
     username "<username>"
     password "<password>"
   }
 }
 ```
-
-## Environment Variables
-
-You can also set the following environment variables to configure the module:
-
-- `AUTODNS_USERNAME`
-- `AUTODNS_PASSWORD`
-- `AUTODNS_ENDPOINT`
-- `AUTODNS_CONTEXT`
 
 ## License
 

@@ -37,7 +37,7 @@ func TestUnmarshalCaddyFile(t *testing.T) {
 			expectePassword := "secretpassword"
 			actualPassword := p.Provider.Password
 			if expectePassword != actualPassword {
-				t.Errorf("Expected SecretAccessKey to be '%s' but got '%s'", expectePassword, actualPassword)
+				t.Errorf("Expected Password to be '%s' but got '%s'", expectePassword, actualPassword)
 			}
 		})
 	}

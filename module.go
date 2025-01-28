@@ -3,11 +3,11 @@ package autodns
 import (
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
-	libdnsAutoDns "github.com/libdns/autodns"
+	libdnsautodns "github.com/libdns/autodns"
 )
 
 // Provider lets Caddy read and manipulate DNS records hosted by this DNS provider.
-type Provider struct{ *libdnsAutoDns.Provider }
+type Provider struct{ *libdnsautodns.Provider }
 
 func init() {
 	caddy.RegisterModule(Provider{})
@@ -17,7 +17,7 @@ func init() {
 func (Provider) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID:  "dns.providers.autodns",
-		New: func() caddy.Module { return &Provider{new(libdnsAutoDns.Provider)} },
+		New: func() caddy.Module { return &Provider{new(libdnsautodns.Provider)} },
 	}
 }
 
